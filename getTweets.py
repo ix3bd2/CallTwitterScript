@@ -14,19 +14,28 @@ parse_json = json.loads(response.text)
 tweet1 = parse_json['data'][0]['id']
 tweet2 = parse_json['data'][1]['id']
 
+urlemb = "https://publish.twitter.com/oembed?url=https://twitter.com/GenshinImpact/status/" + tweet1
 
+payloademb={}
+headersemb = {
+  'Cookie': 'guest_id=v1%3A165289794183344721; guest_id_ads=v1%3A165289794183344721; guest_id_marketing=v1%3A165289794183344721; personalization_id="v1_R87GhHRNyEFy7aXKDzGvEw=="'
+}
+
+responseemb = requests.request("GET", urlemb, headers=headersemb, data=payloademb)
+parse_jsonemb = json.loads(responseemb.text)
+tweetenb = parse_jsonemb['html']
 
 latestSocialUrl = "https://api.genshinworldrecords.com/latest_socials/3"
 
 latestSocialPayload = json.dumps({
   "tweets": [
-    tweet1
+    tweetenb
   ]
 })
 latestSocialHeaders = {
   'Content-Type': 'application/json'
 }
 
-response = requests.request("PUT", latestSocialUrl, headers=latestSocialHeaders, data=latestSocialPayload)
-
+response1 = requests.request("PUT", latestSocialUrl, headers=latestSocialHeaders, data=latestSocialPayload)
+print(response1.text)
 print(tweet2)
