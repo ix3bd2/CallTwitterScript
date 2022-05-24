@@ -16,12 +16,11 @@ tweet2 = parse_json['data'][1]['id']
 
 
 
-latestSocialUrl = "https://127.0.0.1:8000/latest_socials/3"
+latestSocialUrl = "https://api.genshinworldrecords.com/latest_socials/3"
 
 latestSocialPayload = json.dumps({
   "tweets": [
-    tweet1,
-    tweet2
+    tweet1
   ]
 })
 latestSocialHeaders = {
